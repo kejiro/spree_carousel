@@ -1,0 +1,12 @@
+<%- cache(item) do -%>
+  <div class="carousel-item<%= item_counter == 1 ? ' active' : '' %>">
+    <%= link_to item.link do %>
+      <%= image_tag item.image.attachment.url(:large), class: 'd-block w-100' unless item.image.nil? %>
+      <%- unless item.content.empty? %>
+        <div class="carousel-caption">
+          <%= raw item.content %>
+        </div>
+      <%- end %>
+    <% end %>
+  </div>
+<%- end -%>

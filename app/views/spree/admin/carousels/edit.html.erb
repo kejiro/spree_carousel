@@ -1,0 +1,54 @@
+<% content_for :page_actions do %>
+  <% if frontend_available? %>
+    <%= button_link_to Spree.t(:preview_carousel), product_url(@carousel), { class: "btn-default", icon: 'eye-open', id: 'admin_preview_carousel', target: :_blank } %>
+  <% end %>
+  <% if can?(:create, Spree::Carousel) %>
+    <%= button_link_to Spree.t(:new_carousel), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_carousel' } %>
+  <% end %>
+<% end %>
+
+<%= form_for [:admin, @carousel] do |f| %>
+  <fieldset>
+    <div data-hook="admin_carousel_edit_form">
+      <div class="row">
+        <div data-hook="admin_carousel_form_fields" class="col-xs-12 col-md-6">
+          <div class="form-group" data-hook="sku">
+            <%= f.label :title, Spree.t(:title) %>
+            <%= f.text_field :title, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render partial: 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+  <table class="table sortable" id='listing_carousel_items' data-hook data-sortable-link="<%= update_positions_admin_carousel_items_url @carousel %>">
+    <thead>
+    <tr data-hook="carousel_items_header">
+      <th class="no-border"></th>
+      <th></th>
+      <th><%= Spree.t(:visible) %></th>
+      <th><%= Spree.t(:link) %></th>
+      <th><%= Spree.t(:content) %></th>
+      <th class="actions"><%= link_to_with_icon 'plus', Spree.t(:new_item), new_admin_carousel_item_path(@carousel), class: 'btn btn-success btn-sm' %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @carousel.items.each do |item| %>
+      <tr id="<%= spree_dom_id item %>" data-hook="carousel_items_row">
+        <td class="move-handle">
+          <span class="icon icon-sort handle"></span>
+        </td>
+        <td><%= image_tag item.image.attachment.url(:small) unless item.image.nil? %></td>
+        <td><%= tag('span', class: 'icon icon-ok') if item.visible %></td>
+        <td><%= item.link %></td>
+        <td><%= truncate(strip_tags(item.content)) %></td>
+        <td class="actions actions-2 text-right">
+          <%= toggle_visibility_link(item) if can?(:edit, item) %>
+          <%= link_to_edit item.id, no_text: true, url: edit_admin_carousel_item_path(@carousel, item) if can?(:edit, item) %>
+          <%= link_to_delete item, no_text: true, url: admin_carousel_item_path(@carousel, item) if can?(:delete, item) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

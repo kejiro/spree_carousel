@@ -9,10 +9,6 @@ module Spree
         Spree::Carousel
       end
 
-      def index
-        puts @collection
-      end
-
       def create
         invoke_callbacks(:create, :before)
 

@@ -3,6 +3,46 @@ module Spree
     class CarouselItemsController < ResourceController
       belongs_to 'spree/carousel'
 
+      def enable
+        invoke_callbacks(:enable, :before)
+        if @object.update_attributes(visible: true)
+          invoke_callbacks(:enable, :after)
+          respond_with(@object) do |format|
+            format.html do
+              flash[:success] = flash_message_for(@object, :successfully_updated)
+              redirect_to edit_admin_carousel_path(@parent)
+            end
+            format.js { render layout: false }
+          end
+        else
+          invoke_callbacks(:update, :fails)
+          respond_with(@object) do |format|
+            format.html { render action: :edit }
+            format.js { render layout: false }
+          end
+        end
+      end
+
+      def disable
+        invoke_callbacks(:disable, :before)
+        if @object.update_attributes(visible: false)
+          invoke_callbacks(:disable, :after)
+          respond_with(@object) do |format|
+            format.html do
+              flash[:success] = flash_message_for(@object, :successfully_updated)
+              redirect_to edit_admin_carousel_path(@parent)
+            end
+            format.js { render layout: false }
+          end
+        else
+          invoke_callbacks(:update, :fails)
+          respond_with(@object) do |format|
+            format.html { render action: :edit }
+            format.js { render layout: false }
+          end
+        end
+      end
+
       def update
         invoke_callbacks(:update, :before)
 

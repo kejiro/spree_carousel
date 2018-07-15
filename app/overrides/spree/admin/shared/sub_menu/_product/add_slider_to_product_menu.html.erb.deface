@@ -1,0 +1,2 @@
+<!-- insert_bottom "[data-hook='admin_product_sub_tabs']" -->
+<%= tab :carousels, match_path: '/carousels' %>

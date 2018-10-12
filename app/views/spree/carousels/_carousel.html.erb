@@ -1,7 +1,7 @@
 <%- cache(@carousel) do -%>
   <div class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
-      <%= render partial: 'spree/carousels/item', collection: @carousel.visible_items, as: :item %>
+      <%= render partial: 'spree/carousels/item', collection: @carousel, as: :item %>
     </div>
   </div>
 <%- end -%>

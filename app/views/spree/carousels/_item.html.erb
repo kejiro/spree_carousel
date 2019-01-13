@@ -1,5 +1,5 @@
 <%- cache(item) do -%>
-  <div class="carousel-item<%= item_counter == 1 ? ' active' : '' %>">
+  <li class="carousel-item<%= item_counter == 1 ? ' active' : '' %>">
     <%= link_to item.link do %>
       <%= image_tag item.image.attachment.url(:product), class: 'd-block w-100' unless item.image.nil? %>
       <%- unless item.content.nil? %>
@@ -8,5 +8,5 @@
         </div>
       <%- end %>
     <% end %>
-  </div>
+  </li>
 <%- end -%>

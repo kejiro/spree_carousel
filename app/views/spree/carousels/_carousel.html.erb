@@ -1,10 +1,10 @@
 <%- cache(@carousel) do -%>
-  <div uk-slideshow="ratio: 7:3; animation: push">
-    <div class="">
+  <div uk-slideshow="ratio: 500:200; animation: push; autoplay: true">
+    <div class="uk-position-relative uk-visible-toggle uk-light">
       <ul class="uk-slideshow-items">
         <%= render partial: 'spree/carousels/item', collection: @carousel, as: :item %>
       </ul>
     </div>
-    <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"/>
+    <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
   </div>
 <%- end -%>

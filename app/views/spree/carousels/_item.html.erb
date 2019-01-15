@@ -1,12 +1,10 @@
 <%- cache(item) do -%>
   <li class="carousel-item<%= item_counter == 1 ? ' active' : '' %>">
-    <%= link_to item.link do %>
-      <%= image_tag item.image.attachment.url(:product), class: 'd-block w-100' unless item.image.nil? %>
-      <%- unless item.content.nil? %>
-        <div class="carousel-caption">
-          <%= raw item.content %>
-        </div>
-      <%- end %>
-    <% end %>
+    <%= image_tag item.image.attachment.url(:product), class: '', 'uk-cover': '' unless item.image.nil? %>
+    <%- unless item.content.nil? %>
+      <div class="uk-overlay uk-position-bottom">
+        <%= raw item.content %>
+      </div>
+    <%- end %>
   </li>
 <%- end -%>

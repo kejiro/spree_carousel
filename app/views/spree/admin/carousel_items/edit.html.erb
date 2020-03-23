@@ -1,7 +1,7 @@
 <div class="container">
   <%= form_for [:admin, @object], url: admin_carousel_item_path(@parent, @object), method: :put, html: { multipart: true } do |f| %>
     <div data-hook="admin_carousel_item_form_image">
-      <%= image_tag @object.image.attachment.url(:original) unless @object.image.nil? %>
+      <%= image_tag @object.image.url(:original) unless @object.image.nil? %>
       <%= f.fields_for :image, @object.image do |i| %>
         <div class="form-group">
           <%= i.label :attachment, Spree.t(:upload) %>

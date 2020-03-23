@@ -1,9 +1,9 @@
 <% content_for :page_actions do %>
   <% if frontend_available? %>
-    <%= button_link_to Spree.t(:preview_carousel), product_url(@carousel), { class: "btn-default", icon: 'eye-open', id: 'admin_preview_carousel', target: :_blank } %>
+    <%= button_link_to Spree.t(:preview_carousel), product_url(@carousel), {class: "btn-default", icon: 'eye-open', id: 'admin_preview_carousel', target: :_blank} %>
   <% end %>
   <% if can?(:create, Spree::Carousel) %>
-    <%= button_link_to Spree.t(:new_carousel), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_carousel' } %>
+    <%= button_link_to Spree.t(:new_carousel), new_object_url, {class: "btn-success", icon: 'add', id: 'admin_new_carousel'} %>
   <% end %>
 <% end %>
 
@@ -38,7 +38,7 @@
         <td class="move-handle">
           <span class="icon icon-sort handle"></span>
         </td>
-        <td><%= image_tag item.image.attachment.url(:small) unless item.image.nil? %></td>
+        <td><%= image_tag item.image.url(:small) unless item.image.nil? %></td>
         <td><%= tag('span', class: 'icon icon-ok') if item.visible %></td>
         <td><%= item.link %></td>
         <td><%= truncate(strip_tags(item.content)) %></td>
